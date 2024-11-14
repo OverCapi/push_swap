@@ -1,5 +1,6 @@
 SRCS_FILE =  push_swap.c \
-			 instruction.c
+			 instruction.c \
+			 radix.c
 
 OBJECT_FILE = $(SRCS_FILE:.c=.o)
 
@@ -18,11 +19,11 @@ all: $(NAME)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-lib:
+$(LIBFT):
 	make -C libft bonus
 	mv libft/$(LIBFT) ./$(LIBFT)
 
-$(NAME): lib $(OBJECT_FILE)
+$(NAME): $(LIBFT) $(OBJECT_FILE)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJECT_FILE) $(LIBFT)
 
 clean:

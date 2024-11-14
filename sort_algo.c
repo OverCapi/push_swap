@@ -4,7 +4,7 @@
 // stack_b : 32 --> 77 --> 8 --> -9 --> 3 --> NULL
 
 
-void	merge_sort(t_stack *stack_a, t_stack *stack_b)
+void	sort_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_a->size < 2)
 		return ;

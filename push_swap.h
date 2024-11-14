@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:33 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/13 14:43:03 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/14 18:06:08 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,38 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-
 # include <stdio.h>
+
+typedef struct s_list_ps
+{
+	int					nb;
+	int					index;
+	struct s_list_ps	*next;
+}						t_list_ps;
 
 typedef struct s_stack
 {
-	t_list	*list;
-	size_t	size;
-}			t_stack;
+	struct s_list_ps	*list;
+	size_t				size;
+	size_t				nb_instruction;
+}						t_stack;
+
+/* LST FUNCTION */
+t_list_ps	*ft_lstnew_ps(int nb);
+t_list_ps	*ft_lstlast_ps(t_list_ps *lst);
+void	ft_lstadd_back_ps(t_list_ps **lst, t_list_ps *new);
+void	ft_lstdelone_ps(t_list_ps *lst, void (*del)(int *));
+void	ft_lstclear_ps(t_list_ps **lst, void (*del)(int *));
+void	ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
 
 /* INSTRUCTION */
 void	swap(t_stack *stack);
 void	push(t_stack *stack_1, t_stack *stack_2);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
+
+/* SORT ALGO */
+void	print_list(t_stack stack_a, t_stack stack_b);
+void	sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif
