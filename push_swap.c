@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/14 18:18:26 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/15 16:05:00 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,39 +112,47 @@ void	ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new)
 	*lst = new;
 }
 
+static void	new_stack(t_stack *stack)
+{
+	stack->list = NULL;
+	stack->size = 0;
+	stack->nb_instruction = 0;
+}
+
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	t_stack	stack_a = (t_stack){
-		.list = NULL,
-		.size = 0,
-		.nb_instruction = 0
-	};
-	t_stack	stack_b = (t_stack){
-		.list = NULL,
-		.size = 0,
-		.nb_instruction = 0
-	};
-	size_t	i;
+	int			i;
+	t_stack		stack_a;
+	t_stack		stack_b;
+	t_list_ps	*new_node;
 
+	if (argc < 2)
+		return ((void)write(2, "Error\n", 6), 1);
 	i = 1;
-	int	tab[] =  {76,50,47,75,36,96,89,82,90,24,68,49,21,97,78,58,57,69,93,94,5,22,32,59,43,33,48,72,95,17,80,35,1,34,19,84,39,15,65,70,66,4,55,3,46,9,2,74,62,85,98,71,20,7,42,53,61,60,14,16,29,77,83,12,8,6,91,25,18,23,63,41,31,40,73,81,10,44,79,88,99,64,87,13,30,27,38,11,26,56,52,28,100,92,67,54,86,51,45,37};
-	stack_a.list=ft_lstnew_ps(tab[0]);
-	stack_a.size = 100;
-	while (i < stack_a.size)
+	new_stack(&stack_a);
+	new_stack(&stack_b);
+	stack_a.list = ft_lstnew_ps(ft_atoi(argv[i++]));
+	if (!stack_a.list)
+		return ((void)write(2, "Error\n", 6), 1);
+	while (i < argc)
 	{
-		ft_lstadd_back_ps(&stack_a.list, ft_lstnew_ps(tab[i]));
-		i++;
+		new_node = ft_lstnew_ps(ft_atoi(argv[i++]));
+		if (!new_node)
+		{
+			ft_lstclear_ps(&stack_a.list, &del);
+			return ((void)write(2, "Error\n", 6), 1);
+		}
+		ft_lstadd_back_ps(&stack_a.list, new_node);
+		stack_a.size++;
 	}
 	printf("-------------------------------------------------------------------\n");
 	print_list(stack_a, stack_b);
 
 	sort(&stack_a, &stack_b);
 
+	printf("-------------------------------------------------------------------\n");
 	print_list(stack_a, stack_b);
-	printf("number of instruction to sort the list : %zu\n", stack_a.nb_instruction + stack_b.nb_instruction);
-
+	printf("nb instruction : %lu\n", stack_a.nb_instruction + stack_b.nb_instruction);
 	ft_lstclear_ps(&stack_a.list, &del);
 	ft_lstclear_ps(&stack_b.list, &del);
 	return (0);
