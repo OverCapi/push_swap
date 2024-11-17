@@ -5,7 +5,8 @@ STR_PATH = ./str
 WRITE_PATH = ./write
 LINKED_LIST_PATH = ./linked_list
 
-SRCS_CHAR_FUNCTION =			$(CHAR_PATH)/ft_isalnum.c \
+SRCS_CHAR_FUNCTION =			$(CHAR_PATH)/ft_iswhite_space.c \
+								$(CHAR_PATH)/ft_isalnum.c \
 								$(CHAR_PATH)/ft_isalpha.c \
 								$(CHAR_PATH)/ft_isascii.c \
 								$(CHAR_PATH)/ft_isdigit.c \
@@ -36,7 +37,8 @@ SRCS_STR_FUNCTION = 			$(STR_PATH)/ft_split.c \
 								$(STR_PATH)/ft_strtrim.c \
 								$(STR_PATH)/ft_substr.c
 
-SRCS_CONVERTER_FUNCTION =		$(CONVERTER_PATH)/ft_atoi.c \
+SRCS_CONVERTER_FUNCTION =		$(CONVERTER_PATH)/ft_atoi_safe.c \
+								$(CONVERTER_PATH)/ft_atoi.c \
 								$(CONVERTER_PATH)/ft_itoa.c
 
 SRCS_WRITE_FUNCTION = 			$(WRITE_PATH)/ft_putchar_fd.c \

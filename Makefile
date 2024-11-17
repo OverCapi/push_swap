@@ -1,6 +1,13 @@
 SRCS_FILE =  push_swap.c \
+			 parsing.c \
 			 instruction.c \
-			 radix.c
+			 radix.c \
+			 ft_lstlast_ps.c \
+			 ft_lstadd_back_ps.c \
+			 ft_lstadd_front_ps.c \
+			 ft_lstclear_ps.c \
+			 ft_lstdelone_ps.c \
+			 ft_lstnew_ps.c \
 
 OBJECT_FILE = $(SRCS_FILE:.c=.o)
 

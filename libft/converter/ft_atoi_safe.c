@@ -1,38 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_safe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 16:47:49 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 05:55:55 by llemmel          ###   ########.fr       */
+/*   Created: 2024/11/17 05:52:14 by llemmel           #+#    #+#             */
+/*   Updated: 2024/11/17 06:27:58 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_atoi(const char *nptr)
+static int check_overflow(long long int nb, int sign)
+{
+	if (sign == 1 && nb > 2147483647)
+		return (-1);
+	else if (sign == -1 && (nb < -2147483648 || nb >= 2147483647))
+		return (-1);
+	return (0);
+}
+
+int	ft_atoi_safe(const char *nptr)
 {
 	int		nb;
-	int		is_neg;
+	int		sign;
 	int		i;
 
 	i = 0;
 	nb = 0;
-	is_neg = 1;
+	sign = 1;
 	while (ft_iswhite_space(nptr[i]) == 1 && nptr[i] != '\0')
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-			is_neg = -1;
+			sign = -1;
 		i++;
 	}
 	while (ft_isdigit(nptr[i]) == 1)
 	{
+		if (check_overflow((long long int)nb * 10 + nptr[i] - '0', sign) == -1)
+			return (-69);
 		nb = nb * 10 + nptr[i] - '0';
 		i++;
 	}
-	return (nb * is_neg);
+	return (nb * sign);
 }
