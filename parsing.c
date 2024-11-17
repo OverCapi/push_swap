@@ -1,15 +1,5 @@
 #include "push_swap.h"
 
-static void	free_split(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-}
-
 static int	check_string(char *str)
 {
 	size_t	i;
@@ -37,33 +27,6 @@ static int	check_duplicate(t_stack *stack, int nb)
 			return (-1);
 		cp = cp->next;
 	}
-	return (0);
-}
-
-int	parse_number_split(char **argv_split, t_stack *stack)
-{
-	t_list_ps	*new_node;
-	int			nb;
-	size_t		i;
-
-	i = 0;
-	while (argv_split[i])
-	{
-		nb = ft_atoi_safe(argv_split[i]);
-		if (check_duplicate(stack, nb) != 0)
-			return (ft_lstclear_ps(&stack->list, NULL), \
-			free_split(argv_split), -1);
-		if (nb == 0 && ft_strncmp(argv_split[i], "0", 1))
-			return (-1);
-		new_node = ft_lstnew_ps(nb);
-		if (!new_node)
-			return (ft_lstclear_ps(&stack->list, NULL), \
-			free_split(argv_split), -1);
-		ft_lstadd_back_ps(&stack->list, new_node);
-		stack->size += 1;
-		i++;
-	}
-	free_split(argv_split);
 	return (0);
 }
 

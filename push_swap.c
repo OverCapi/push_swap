@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:33:29 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/17 19:10:18 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	init_stack(t_stack *stack)
 
 int	main(int argc, char **argv)
 {
-	char	**argv_split;
 	t_stack	stack_a;
 	t_stack	stack_b;
 
