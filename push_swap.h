@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:33 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:13:39 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:21:30 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,16 @@ void		ft_lstclear_ps(t_list_ps **lst, void (*del)(int *));
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
 
 /* INSTRUCTION */
-void	swap(t_stack *stack);
-void	push(t_stack *stack_1, t_stack *stack_2);
-void	rotate(t_stack *stack);
-void	reverse_rotate(t_stack *stack);
+void		swap(t_stack *stack);
+void		push(t_stack *stack_1, t_stack *stack_2);
+void		rotate(t_stack *stack);
+void		reverse_rotate(t_stack *stack);
 
 /* PARSING */
-int		parse_number_n(char **argv, int argc, t_stack *stack);
-int		parse_number_split(char **argv_split, t_stack *stack);
+int			parse_number_n(char **argv, int argc, t_stack *stack);
+int			parse_number_split(char **argv_split, t_stack *stack);
 
 /* SORT ALGO */
-void	print_list(t_stack stack_a, t_stack stack_b);
-void	sort(t_stack *stack_a, t_stack *stack_b);
+void		merge_sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif

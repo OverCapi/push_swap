@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 19:10:18 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:07:27 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int	main(int argc, char **argv)
 	init_stack(&stack_b);
 	if (parse_number_n(argv, argc, &stack_a) != 0)
 		return ((void)write(2, ERROR_MSG, ERROR_MSG_LEN), 1);
+
+	merge_sort(&stack_a, &stack_b);
+
 	print_lst(stack_a);
+	printf("nb_instruction: %zu\n", stack_a.nb_instruction + stack_b.nb_instruction);
 	ft_lstclear_ps(&stack_a.list, NULL);
 	return (0);
 }
