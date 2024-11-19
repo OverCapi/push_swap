@@ -33,6 +33,15 @@ typedef struct s_stack
 	size_t				nb_instruction;
 }						t_stack;
 
+typedef struct s_stack_node
+{
+	int 				nb;
+	int 				index;
+	int 				push_cost;
+	struct s_stack_node	*target_node;
+	struct s_stack_node	*next;
+} 						t_stack_node;
+
 /* LST FUNCTION */
 t_list_ps	*ft_lstnew_ps(int nb);
 t_list_ps	*ft_lstlast_ps(t_list_ps *lst);
