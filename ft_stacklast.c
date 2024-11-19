@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_ps.c                                  :+:      :+:    :+:   */
+/*   ft_stacklast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 04:32:48 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:06:43 by llemmel          ###   ########.fr       */
+/*   Created: 2024/11/19 15:46:14 by llemmel           #+#    #+#             */
+/*   Updated: 2024/11/19 15:48:20 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstdelone_ps(t_list_ps *lst, void (*del)(int *))
+t_stack_node	*ft_stacklast(t_stack_node *stack)
 {
-	if (!lst)
-		return ;
-	if (del)
-		del(&lst->nb);
-	free(lst);
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
 }

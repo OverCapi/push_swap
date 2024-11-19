@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_ps.c                                     :+:      :+:    :+:   */
+/*   ft_clearstack.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 04:24:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:06:51 by llemmel          ###   ########.fr       */
+/*   Created: 2024/11/19 15:41:22 by llemmel           #+#    #+#             */
+/*   Updated: 2024/11/19 15:48:44 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list_ps	*ft_lstnew_ps(int nb)
+void	ft_clearstack(t_stack_node **stack)
 {
-	t_list_ps	*lst;
+	t_stack_node	*tmp;
 
-	lst = (t_list_ps *)malloc(sizeof(t_list_ps));
-	if (!lst)
-		return (NULL);
-	lst->nb = nb;
-	lst->next = NULL;
-	return (lst);
+	if (!stack || !(*stack))
+		return ;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	*stack = NULL;
 }

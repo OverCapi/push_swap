@@ -6,87 +6,80 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:50:49 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/14 18:07:16 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:07:04 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
 /*
 Intervertit les 2 premiers éléments au sommet de la pile.
 Ne fait rien s’il n’y en a qu’un ou aucun.
 */
-void	swap(t_stack *stack)
+void	swap(t_stack_node **stack)
 {
 	int	ctn_tmp;
 
-	if (stack->size < 2)
+	if (get_size(*stack) < 2)
 		return ;
-	ctn_tmp = stack->list->nb;
-	stack->list->nb = stack->list->next->nb;
-	stack->list->next->nb = ctn_tmp;
-	stack->nb_instruction += 1;
+	ctn_tmp = (*stack)->nb;
+	(*stack)->nb = (*stack)->next->nb;
+	(*stack)->next->nb = ctn_tmp;
 }
 
 /*
 Prend le premier élément au sommet de 1 et le met sur 2.
 Ne fait rien si 1 est vide.
 */
-void	push(t_stack *stack_1, t_stack *stack_2)
+void	push(t_stack_node **stack_1, t_stack_node **stack_2)
 {
-	t_list_ps	*tmp;
+	t_stack_node	*tmp;
 
-	if (stack_1->size == 0)
+	if (get_size(*stack_1) == 0)
 		return ;
-	tmp = stack_1->list->next;
-	if (!stack_2->list)
+	tmp = (*stack_1)->next;
+	if (!stack_2)
 	{
-		stack_2->list = stack_1->list;
-		stack_2->list->next = NULL;
+		*stack_2 = *stack_1;
+		(*stack_2)->next = NULL;
 	}
 	else
-		ft_lstadd_front_ps(&stack_2->list, stack_1->list);
-	stack_1->list = tmp;
-	stack_1->size -= 1;
-	stack_2->size += 1;
-	stack_1->nb_instruction += 1;
+		ft_stackadd_front(stack_2, *stack_1);
+	*stack_1 = tmp;
 }
 
 /*
 Décale d’une position vers le haut tous les élements de la pile.
 Le premier élément devient le dernier.
 */
-void	rotate(t_stack *stack)
+void	rotate(t_stack_node **stack)
 {
-	t_list_ps	*tmp_list;
+	t_stack_node	*tmp;
 
-	if (stack->size < 2)
+	if (get_size(*stack) < 2)
 		return ;
-	tmp_list = stack->list->next;
-	ft_lstadd_back_ps(&tmp_list, stack->list);
-	stack->list->next = NULL;
-	stack->list = tmp_list;
-	stack->nb_instruction += 1;
+	tmp = (*stack)->next;
+	ft_stackadd_front(&tmp, *stack);
+	(*stack)->next = NULL;
+	(*stack) = tmp;
 }
 
 /*
 Décale d’une position vers le bas tous les élements de
 la pile. Le dernier élément devient le premier.
 */
-void	reverse_rotate(t_stack *stack)
+void	reverse_rotate(t_stack_node **stack)
 {
-	t_list_ps	*last_node;
-	t_list_ps	*second_last_node;
+	t_stack_node	*last_node;
+	t_stack_node	*second_last_node;
 
-	if (stack->size < 2)
+	if (get_size(*stack) < 2)
 		return ;
-	last_node = ft_lstlast_ps(stack->list);
-	second_last_node = stack->list;
+	last_node = ft_stacklast(*stack);
+	second_last_node = *stack;
 	while (second_last_node->next->next)
 		second_last_node = second_last_node->next;
 	second_last_node->next = NULL;
-	last_node->next = stack->list;
-	stack->list = last_node;
-	stack->nb_instruction += 1;
+	last_node->next = *stack;
+	*stack = last_node;
 }

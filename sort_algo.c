@@ -6,35 +6,25 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:13:45 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/18 16:40:36 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:10:32 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	init_stack(t_stack *stack)
+static int	is_sorted(t_stack_node *stack)
 {
-	stack->list = NULL;
-	stack->size = 0;
-	stack->nb_instruction = 0;
-}
-
-static int	is_sorted(t_stack *stack)
-{
-	t_list_ps	*cp;
-
-	cp = stack->list;
-	while (cp->next)
+	while (stack->next)
 	{
-		if (cp->nb > cp->next->nb)
+		if (stack->nb > stack->next->nb)
 			return (0);
-		cp = cp->next;
+		stack = stack->next;
 	}
 	return (1);
 }
 
 
-static int	get_size(t_stack_node *stack)
+int	get_size(t_stack_node *stack)
 {
 	int	size;
 
@@ -47,19 +37,19 @@ static int	get_size(t_stack_node *stack)
 	return (size);
 }
 
-static t_stack_node	*get_min_node(t_stack_node *stack)
-{
-	t_stack_node	*min;
+// static t_stack_node	*get_min_node(t_stack_node *stack)
+// {
+// 	t_stack_node	*min;
 
-	min = stack;
-	while (stack)
-	{
-		if (stack->nb < min->nb)
-			min = stack;
-		stack = stack->next;
-	}
-	return (min);
-}
+// 	min = stack;
+// 	while (stack)
+// 	{
+// 		if (stack->nb < min->nb)
+// 			min = stack;
+// 		stack = stack->next;
+// 	}
+// 	return (min);
+// }
 
 static t_stack_node	*get_max_node(t_stack_node *stack)
 {
@@ -99,7 +89,7 @@ static void	update_target_node(t_stack_node **stack_a, t_stack_node *stack_b)
 		(*stack_a)->target_node = get_target_node(*stack_a, stack_b);
 		*stack_a = (*stack_a)->next;
 	}
-	*stack_a = tmp_a
+	*stack_a = tmp_a;
 }
 
 static void	update_cost_push(t_stack_node **stack_a, t_stack_node *stack_b)
@@ -144,26 +134,28 @@ static int	get_cheapest_index(t_stack_node *stack_a)
 
 static void	prep_push(t_stack_node **stack_a, t_stack_node **stack_b, int index)
 {
-	
+	(void)stack_a;
+	(void)stack_b;
+	(void)index;
 }
 
-void	sort(t_stack_node *stack_a, t_stack_node *stack_b)
+void	sort(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	// int	min_b;
 	// int	max_b;
 	int		index;
 
-	if (is_sorted(stack_a))
+	if (is_sorted(*stack_a))
 		return ;
 	push(stack_a, stack_b);
 	push(stack_a, stack_b);
 	// min_b = get_min_node(stack_b)->nb;
 	// max_b = get_max_node(stack_b)->nb;
-	while (get_size(size_a) > 3)
+	while (get_size(*stack_a) > 3)
 	{
-		update_target_node(&stack_a, stack_b);
-		update_cost_push(&stack_a, stack_b);
-		index = get_cheapest_index(stack_a);
-		prep_push(&stack_a, &stack_b, index);
+		update_target_node(stack_a, *stack_b);
+		update_cost_push(stack_a, *stack_b);
+		index = get_cheapest_index(*stack_a);
+		prep_push(stack_a, stack_b, index);
 	}
 }

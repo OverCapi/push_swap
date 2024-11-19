@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_ps.c                                    :+:      :+:    :+:   */
+/*   ft_newstack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 04:25:54 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:06:45 by llemmel          ###   ########.fr       */
+/*   Created: 2024/11/19 15:50:44 by llemmel           #+#    #+#             */
+/*   Updated: 2024/11/19 15:50:49 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list_ps	*ft_lstlast_ps(t_list_ps *lst)
+t_stack_node	*ft_newstack(int nb)
 {
-	if (!lst)
+	t_stack_node	*stack;
+
+	stack = (t_stack_node *)malloc(sizeof(t_stack_node));
+	if (!stack)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	stack->index = 0;
+	stack->nb = nb;
+	stack->push_cost = 0;
+	stack->target_node = NULL;
+	stack->next = NULL;
+	return (stack);
 }

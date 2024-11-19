@@ -16,41 +16,37 @@ static int	check_string(char *str)
 	return (0);
 }
 
-static int	check_duplicate(t_stack *stack, int nb)
+static int	check_duplicate(t_stack_node *stack, int nb)
 {
-	t_list_ps	*cp;
-
-	cp = stack->list;
-	while (cp)
+	while (stack)
 	{
-		if (cp->nb == nb)
-			return (-1);
-		cp = cp->next;
+		if (stack->nb == nb)
+			return (1);
+		stack = stack->next;
 	}
 	return (0);
 }
 
-int	parse_number_n(char **argv, int argc, t_stack *stack)
+int	parse_number_n(char **argv, int argc, t_stack_node **stack)
 {
-	t_list_ps	*new_node;
-	int			nb;
-	int			i;
+	t_stack_node	*new_node;
+	int				nb;
+	int				i;
 
 	i = 1;
 	while (i < argc)
 	{
 		if (check_string(argv[i]) != 0)
-			return (ft_lstclear_ps(&stack->list, NULL), -1);
+			return (ft_clearstack(stack), -1);
 		nb = ft_atoi_safe(argv[i]);
-		if (check_duplicate(stack, nb) != 0)
-			return (ft_lstclear_ps(&stack->list, NULL), -1);
+		if (check_duplicate(*stack, nb) != 0)
+			return (ft_clearstack(stack), -1);
 		if (nb == -69 && ft_strncmp(argv[i], "-69", ft_strlen(argv[i])))
-			return (ft_lstclear_ps(&stack->list, NULL), -1);
-		new_node = ft_lstnew_ps(nb);
+			return (ft_clearstack(stack), -1);
+		new_node = ft_newstack(nb);
 		if (!new_node)
-			return (ft_lstclear_ps(&stack->list, NULL), -1);
-		ft_lstadd_back_ps(&stack->list, new_node);
-		stack->size += 1;
+			return (ft_clearstack(stack), -1);
+		ft_stackadd_back(stack, new_node);
 		i++;
 	}
 	return (0);
