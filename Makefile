@@ -17,6 +17,7 @@ DEBUG = -g3 -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror $(DEBUG)
 
 LIBFT = libft.a
+FT_PRINTF = libftprintf.a
 
 NAME = push_swap
 
@@ -25,16 +26,21 @@ all: $(NAME)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
+$(FT_PRINTF):
+	make -C ft_printf all
+	mv ft_printf/$(FT_PRINTF) ./$(FT_PRINTF)
+
 $(LIBFT):
 	make -C libft bonus
 	mv libft/$(LIBFT) ./$(LIBFT)
 
-$(NAME): $(LIBFT) $(OBJECT_FILE)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJECT_FILE) $(LIBFT)
+$(NAME): $(LIBFT) $(FT_PRINTF) $(OBJECT_FILE)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJECT_FILE) $(LIBFT) $(FT_PRINTF)
 
 clean:
-	rm -f $(OBJECT_FILE) $(LIBFT)
+	rm -f $(OBJECT_FILE) $(LIBFT) $(FT_PRINTF)
 	make -C libft fclean
+	make -C ft_printf fclean
 
 fclean: clean
 	rm -f $(NAME)

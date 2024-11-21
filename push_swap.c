@@ -6,30 +6,21 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/19 19:15:52 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 00:12:34 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	print_lst(t_stack_node *stack)
+void	print_lst(t_stack_node *stack)
 {
 	while (stack)
 	{
-		printf("%d\n", stack->nb);
+		ft_printf("%d\n", stack->nb);
 		stack = stack->next;
 	}
 }
-
-// static void	init_stack(t_stack_node **stack)
-// {
-// 	(*stack)->nb = 0;
-// 	(*stack)->index = 0;
-// 	(*stack)->push_cost = 0;
-// 	(*stack)->target_node = NULL;
-// 	(*stack)->next = NULL;
-// }
 
 int	main(int argc, char **argv)
 {
@@ -44,8 +35,6 @@ int	main(int argc, char **argv)
 		return ((void)write(2, ERROR_MSG, ERROR_MSG_LEN), 1);
 
 	sort(&stack_a, &stack_b);
-
-	print_lst(stack_a);
 
 	ft_clearstack(&stack_a);
 	ft_clearstack(&stack_b);

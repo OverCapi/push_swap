@@ -36,6 +36,7 @@ int	parse_number_n(char **argv, int argc, t_stack_node **stack)
 	i = 1;
 	while (i < argc)
 	{
+		// printf("{%s}\n", argv[i]);
 		if (check_string(argv[i]) != 0)
 			return (ft_clearstack(stack), -1);
 		nb = ft_atoi_safe(argv[i]);

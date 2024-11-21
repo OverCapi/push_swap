@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:50:49 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/19 19:07:04 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 00:08:41 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Intervertit les 2 premiers éléments au sommet de la pile.
 Ne fait rien s’il n’y en a qu’un ou aucun.
 */
-void	swap(t_stack_node **stack)
+void	swap(t_stack_node **stack, char c)
 {
 	int	ctn_tmp;
 
@@ -25,13 +25,14 @@ void	swap(t_stack_node **stack)
 	ctn_tmp = (*stack)->nb;
 	(*stack)->nb = (*stack)->next->nb;
 	(*stack)->next->nb = ctn_tmp;
+	ft_printf("s%c\n", c);
 }
 
 /*
 Prend le premier élément au sommet de 1 et le met sur 2.
 Ne fait rien si 1 est vide.
 */
-void	push(t_stack_node **stack_1, t_stack_node **stack_2)
+void	push(t_stack_node **stack_1, t_stack_node **stack_2, char c)
 {
 	t_stack_node	*tmp;
 
@@ -46,29 +47,31 @@ void	push(t_stack_node **stack_1, t_stack_node **stack_2)
 	else
 		ft_stackadd_front(stack_2, *stack_1);
 	*stack_1 = tmp;
+	ft_printf("p%c\n", c);
 }
 
 /*
 Décale d’une position vers le haut tous les élements de la pile.
 Le premier élément devient le dernier.
 */
-void	rotate(t_stack_node **stack)
+void	rotate(t_stack_node **stack, char c)
 {
 	t_stack_node	*tmp;
 
 	if (get_size(*stack) < 2)
 		return ;
 	tmp = (*stack)->next;
-	ft_stackadd_front(&tmp, *stack);
+	ft_stackadd_back(&tmp, *stack);
 	(*stack)->next = NULL;
 	(*stack) = tmp;
+	ft_printf("r%c\n", c);
 }
 
 /*
 Décale d’une position vers le bas tous les élements de
 la pile. Le dernier élément devient le premier.
 */
-void	reverse_rotate(t_stack_node **stack)
+void	reverse_rotate(t_stack_node **stack, char c)
 {
 	t_stack_node	*last_node;
 	t_stack_node	*second_last_node;
@@ -82,4 +85,5 @@ void	reverse_rotate(t_stack_node **stack)
 	second_last_node->next = NULL;
 	last_node->next = *stack;
 	*stack = last_node;
+	ft_printf("rr%c\n", c);
 }
