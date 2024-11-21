@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:50:44 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/20 17:37:18 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:53:42 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_stack_node	*ft_newstack(int nb)
 	stack = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (!stack)
 		return (NULL);
+	stack->flag = 0;
 	stack->nb = nb;
 	stack->push_cost = 0;
 	stack->target_node = NULL;

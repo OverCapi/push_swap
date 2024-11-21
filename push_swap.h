@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:33 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/21 00:08:54 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:48:04 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_stack_node
 {
 	int 				nb;
 	int 				push_cost;
+	int					flag;
 	struct s_stack_node	*target_node;
 	struct s_stack_node	*next;
 } 						t_stack_node;
@@ -41,6 +42,8 @@ void			swap(t_stack_node **stack, char c);
 void			push(t_stack_node **stack_1, t_stack_node **stack_2, char c);
 void			rotate(t_stack_node **stack, char c);
 void			reverse_rotate(t_stack_node **stack, char c);
+void			rotate_double(t_stack_node **stack_a, t_stack_node **stack_b);
+void			reverse_rotate_double(t_stack_node **A, t_stack_node **B);
 
 /* PARSING */
 int				parse_number_n(char **argv, int argc, t_stack_node **stack);

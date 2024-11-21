@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:27:37 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/21 00:12:34 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:55:33 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	if (parse_number_n(argv, argc, &stack_a) != 0)
 		return ((void)write(2, ERROR_MSG, ERROR_MSG_LEN), 1);
+
+	// print_lst(stack_a);
 
 	sort(&stack_a, &stack_b);
 

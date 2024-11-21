@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:50:49 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/21 00:08:41 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/21 15:41:08 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	swap(t_stack_node **stack, char c)
 	ctn_tmp = (*stack)->nb;
 	(*stack)->nb = (*stack)->next->nb;
 	(*stack)->next->nb = ctn_tmp;
-	ft_printf("s%c\n", c);
+	if (c)
+		ft_printf("s%c\n", c);
 }
 
 /*
@@ -47,7 +48,8 @@ void	push(t_stack_node **stack_1, t_stack_node **stack_2, char c)
 	else
 		ft_stackadd_front(stack_2, *stack_1);
 	*stack_1 = tmp;
-	ft_printf("p%c\n", c);
+	if (c)
+		ft_printf("p%c\n", c);
 }
 
 /*
@@ -64,7 +66,8 @@ void	rotate(t_stack_node **stack, char c)
 	ft_stackadd_back(&tmp, *stack);
 	(*stack)->next = NULL;
 	(*stack) = tmp;
-	ft_printf("r%c\n", c);
+	if (c)
+		ft_printf("r%c\n", c);
 }
 
 /*
@@ -85,5 +88,20 @@ void	reverse_rotate(t_stack_node **stack, char c)
 	second_last_node->next = NULL;
 	last_node->next = *stack;
 	*stack = last_node;
-	ft_printf("rr%c\n", c);
+	if (c)
+		ft_printf("rr%c\n", c);
+}
+
+void	rotate_double(t_stack_node **stack_a, t_stack_node **stack_b)
+{
+	rotate(stack_a, '\0');
+	rotate(stack_b, '\0');
+	ft_printf("rr\n");
+}
+
+void	reverse_rotate_double(t_stack_node **A, t_stack_node **B)
+{
+	reverse_rotate(A, '\0');
+	reverse_rotate(B, '\0');
+	ft_printf("rrr\n");
 }
