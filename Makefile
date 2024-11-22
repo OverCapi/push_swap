@@ -1,7 +1,7 @@
 SRCS_FILE =  push_swap.c \
 			 parsing.c \
 			 instruction.c \
-			 sort_algo.c \
+			 sort_algo_new.c \
 			 ft_clearstack.c \
 			 ft_newstack.c \
 			 ft_stackadd_back.c \

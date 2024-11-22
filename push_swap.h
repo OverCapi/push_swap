@@ -19,14 +19,24 @@
 # define ERROR_MSG "Error\n"
 # define ERROR_MSG_LEN 6
 
+// typedef struct s_stack_node
+// {
+// 	int 				nb;
+// 	int 				push_cost;
+// 	int					flag;
+// 	struct s_stack_node	*target_node;
+// 	struct s_stack_node	*next;
+// } 						t_stack_node;
+
 typedef struct s_stack_node
 {
-	int 				nb;
-	int 				push_cost;
-	int					flag;
-	struct s_stack_node	*target_node;
-	struct s_stack_node	*next;
-} 						t_stack_node;
+	int					nb;
+	int					push_cost;
+	int					index;
+	int					median;
+	struct s_stack_node *target_node;
+	struct s_stack_node *next;
+}						t_stack_node;
 
 /* LST FUNCTION */
 t_stack_node	*ft_newstack(int nb);
