@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:13:33 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/22 17:25:37 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:45:42 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	update(t_stack_node **A, t_stack_node **B, int index)
 		update_index_stack(B);
 		return ;
 	}
+	update_index_stack(A);
+	update_index_stack(B);
 	update_target_node(A, *B);
 	update_cost_push(A, *B);
 }
