@@ -6,13 +6,13 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 05:52:14 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/17 06:27:58 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:30:08 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int check_overflow(long long int nb, int sign)
+static int	check_overflow(long long int nb, int sign)
 {
 	if (sign == 1 && nb > 2147483647)
 		return (-1);

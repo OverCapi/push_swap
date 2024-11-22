@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:50:49 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/21 15:41:08 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:20:41 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,4 @@ void	reverse_rotate(t_stack_node **stack, char c)
 	*stack = last_node;
 	if (c)
 		ft_printf("rr%c\n", c);
-}
-
-void	rotate_double(t_stack_node **stack_a, t_stack_node **stack_b)
-{
-	rotate(stack_a, '\0');
-	rotate(stack_b, '\0');
-	ft_printf("rr\n");
-}
-
-void	reverse_rotate_double(t_stack_node **A, t_stack_node **B)
-{
-	reverse_rotate(A, '\0');
-	reverse_rotate(B, '\0');
-	ft_printf("rrr\n");
 }

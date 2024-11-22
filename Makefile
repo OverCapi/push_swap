@@ -1,7 +1,12 @@
 SRCS_FILE =  push_swap.c \
+			 sort_algo_utils.c \
+			 update.c \
+			 push_cost.c \
+			 target_node.c \
 			 parsing.c \
 			 instruction.c \
-			 sort_algo_new.c \
+			 instruction_double.c \
+			 sort_algo.c \
 			 ft_clearstack.c \
 			 ft_newstack.c \
 			 ft_stackadd_back.c \
