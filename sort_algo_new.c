@@ -6,7 +6,7 @@
 /*   By: llemmel <llemmel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 19:13:45 by llemmel           #+#    #+#             */
-/*   Updated: 2024/11/22 03:30:46 by llemmel          ###   ########.fr       */
+/*   Updated: 2024/11/22 16:50:05 by llemmel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_stack_node	*get_target_node(t_stack_node *node, t_stack_node *B)
 	tmp = B;
 	while (B)
 	{
-		if (B->nb < node->nb && (!tnode || tnode->nb > B->nb))
+		if (B->nb < node->nb && (!tnode || tnode->nb < B->nb))
 			tnode = B;
 		B = B->next;
 	}
@@ -123,11 +123,13 @@ void	update_cost_push(t_stack_node **A, t_stack_node *B)
 		if ((*A)->median == 0)
 			(*A)->push_cost = (*A)->index;
 		else
-			(*A)->push_cost = get_size(*A) - (*A)->index;
+			(*A)->push_cost = get_size(tmp) - (*A)->index;
+		// ft_printf("premier calcule : %d, (index : %d, size : %d)\n", (*A)->push_cost, (*A)->index, get_size(*A));
 		if ((*A)->target_node->median == 0)
 			(*A)->push_cost += (*A)->target_node->index;
 		else
 			(*A)->push_cost += get_size(B) - (*A)->target_node->index;
+		// ft_printf("cost push of %d : %d (target : %d)\n", (*A)->nb, (*A)->push_cost, (*A)->target_node->nb);
 		*A = (*A)->next;
 	}
 	*A = tmp;
@@ -142,8 +144,6 @@ t_stack_node	*get_cheapest_node(t_stack_node *stack)
 	{
 		if (cheapest->push_cost > stack->push_cost)
 			cheapest = stack;
-		else if (stack->push_cost == 0)
-			return (stack);
 		stack = stack->next;
 	}
 	return (cheapest);
@@ -155,10 +155,10 @@ void	move_to_b(t_stack_node **A, t_stack_node **B)
 
 	cheap = get_cheapest_node(*A);
 	if (cheap->median == 0 && cheap->target_node->median == 0)
-		while ((*A)->nb != cheap->nb && (*A)->nb != cheap->target_node->nb)
+		while ((*A)->nb != cheap->nb && (*B)->nb != cheap->target_node->nb)
 			rotate_double(A, B);
 	else if (cheap->median == 1 && cheap->target_node->median == 1)
-		while ((*A)->nb != cheap->nb && (*A)->nb != cheap->target_node->nb)
+		while ((*A)->nb != cheap->nb && (*B)->nb != cheap->target_node->nb)
 			reverse_rotate_double(A, B);
 	if (cheap->median == 0)
 		while (cheap->nb != (*A)->nb)
@@ -230,7 +230,8 @@ void	sort(t_stack_node **A, t_stack_node **B)
 		return (swap(A, 'a'));
 	else if (size_a == 3)
 		return (sort_three(A));
-	push(A, B, 'b');
+	else if (size_a > 4)
+		push(A, B, 'b');
 	push(A, B, 'b');
 	while (get_size(*A) > 3)
 	{
